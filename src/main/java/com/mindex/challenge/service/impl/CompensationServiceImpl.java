@@ -4,6 +4,7 @@ import com.mindex.challenge.dao.CompensationRepository;
 import com.mindex.challenge.dao.EmployeeRepository;
 import com.mindex.challenge.data.Compensation;
 import com.mindex.challenge.data.Employee;
+import com.mindex.challenge.exception.CompensationNotFoundException;
 import com.mindex.challenge.exception.EmployeeNotFoundException;
 import com.mindex.challenge.service.CompensationService;
 import org.slf4j.Logger;
@@ -62,6 +63,10 @@ public class CompensationServiceImpl implements CompensationService {
         Optional<Employee> employee = Optional.ofNullable(employeeRepository.findByEmployeeId(compensation.getEmployeeId()));
         if(!employee.isPresent()) {
             throw new EmployeeNotFoundException("Employee with employee id " + compensation.getEmployeeId() + " does not exist");
+        }
+        Optional<Compensation> compensationExists = Optional.ofNullable(compensationRepository.findCompensationByEmployeeId(compensation.getEmployeeId()));
+        if(!compensationExists.isPresent()) {
+            throw new CompensationNotFoundException("Compensation for employee id " + compensation.getEmployeeId() + " does not exist");
         }
 
         return compensationRepository.save(compensation);
