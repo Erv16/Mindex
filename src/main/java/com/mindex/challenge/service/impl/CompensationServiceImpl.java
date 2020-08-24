@@ -6,6 +6,8 @@ import com.mindex.challenge.data.Compensation;
 import com.mindex.challenge.data.Employee;
 import com.mindex.challenge.exception.EmployeeNotFoundException;
 import com.mindex.challenge.service.CompensationService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,17 +16,23 @@ import java.util.Optional;
 @Service
 public class CompensationServiceImpl implements CompensationService {
 
+    private static final Logger LOG = LoggerFactory.getLogger(CompensationServiceImpl.class);
+
     private CompensationRepository compensationRepository;
     private EmployeeRepository employeeRepository;
 
     @Autowired
     public CompensationServiceImpl(CompensationRepository compensationRepository, EmployeeRepository employeeRepository) {
+
+        LOG.debug("Autowired instances of Compensation and Employee Repository");
         this.compensationRepository = compensationRepository;
         this.employeeRepository = employeeRepository;
     }
 
     @Override
     public Compensation createCompensation(Compensation compensation) {
+
+        LOG.debug("Creating compensation [{}]", compensation);
 
         Optional<Employee> employee = Optional.ofNullable(employeeRepository.findByEmployeeId(compensation.getEmployeeId()));
         if(!employee.isPresent()) {
@@ -35,6 +43,8 @@ public class CompensationServiceImpl implements CompensationService {
 
     @Override
     public Compensation readCompensation(String employeeId) {
+
+        LOG.debug("Reading compensation of employee with id [{}]", employeeId);
 
         Optional<Employee> employee = Optional.ofNullable(employeeRepository.findByEmployeeId(employeeId));
         if(!employee.isPresent()) {
