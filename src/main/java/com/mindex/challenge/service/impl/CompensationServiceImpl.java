@@ -20,11 +20,14 @@ public class CompensationServiceImpl implements CompensationService {
 
     private static final Logger LOG = LoggerFactory.getLogger(CompensationServiceImpl.class);
 
+    @Autowired
     private CompensationRepository compensationRepository;
+
+    @Autowired
     private EmployeeRepository employeeRepository;
 
     @Autowired
-    public CompensationServiceImpl(CompensationRepository compensationRepository, EmployeeRepository employeeRepository) {
+    public CompensationServiceImpl() {
 
         LOG.debug("Autowired instances of Compensation and Employee Repository");
         this.compensationRepository = compensationRepository;
@@ -40,7 +43,10 @@ public class CompensationServiceImpl implements CompensationService {
         if(!employee.isPresent()) {
             throw new EmployeeNotFoundException("Employee with employee id " + compensation.getEmployeeId() + " does not exist");
         }
-        return compensationRepository.insert(compensation);
+
+        compensationRepository.insert(compensation);
+
+        return compensation;
     }
 
     @Override
