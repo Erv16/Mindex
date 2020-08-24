@@ -7,6 +7,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class CompensationController {
 
@@ -29,16 +31,21 @@ public class CompensationController {
         return compensationService.createCompensation(compensation);
     }
 
-//    @PutMapping("/compensation/{employeeId}")
-//    public Compensation updateCompensation(@PathVariable String employeeId) {
-//
-//        return compensationService.updateCompensation(employeeId);
-//    }
+    @PutMapping("/compensation/{employeeId}")
+    public Compensation updateCompensation(@PathVariable String employeeId, @RequestBody Compensation compensation) {
+
+        LOG.debug("Received compensation update request for [{}]", employeeId);
+        compensation.setEmployeeId(employeeId);
+        return compensationService.updateCompensation(compensation);
+    }
 
     @GetMapping("/compensation/{employeeId}")
     public Compensation readCompensation(@PathVariable String employeeId) {
 
         LOG.debug("Received compensation read request for [{}]", employeeId);
+        Compensation compensations = compensationService.readCompensation(employeeId);
+        System.out.println(compensations.toString());
+
         return compensationService.readCompensation(employeeId);
     }
 

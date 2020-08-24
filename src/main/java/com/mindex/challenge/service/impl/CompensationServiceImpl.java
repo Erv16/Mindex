@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -52,5 +53,17 @@ public class CompensationServiceImpl implements CompensationService {
         }
 
         return compensationRepository.findCompensationByEmployeeId(employeeId);
+    }
+
+    @Override
+    public Compensation updateCompensation(Compensation compensation) {
+        LOG.debug("Updating compensation of employee with id [{}]", compensation.getEmployeeId());
+
+        Optional<Employee> employee = Optional.ofNullable(employeeRepository.findByEmployeeId(compensation.getEmployeeId()));
+        if(!employee.isPresent()) {
+            throw new EmployeeNotFoundException("Employee with employee id " + compensation.getEmployeeId() + " does not exist");
+        }
+
+        return compensationRepository.save(compensation);
     }
 }
