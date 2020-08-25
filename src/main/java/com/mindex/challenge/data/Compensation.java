@@ -4,6 +4,12 @@ import org.springframework.data.annotation.Id;
 
 import java.time.LocalDate;
 
+/**
+ * Class Definiton for Compensation object for task 2 of the assessment
+ * Properties of the object and methods for accessing its properties
+ *
+ * @author Erwin Palani
+ */
 public class Compensation {
 
     @Id

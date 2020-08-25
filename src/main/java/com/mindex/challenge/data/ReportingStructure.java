@@ -1,5 +1,11 @@
 package com.mindex.challenge.data;
 
+/**
+ * Class Definiton for Reporting Structure object for task 1 of the assessment
+ * Properties of the object and methods for accessing its properties
+ *
+ * @author Erwin Palani
+ */
 public class ReportingStructure {
 
     private Employee employee;

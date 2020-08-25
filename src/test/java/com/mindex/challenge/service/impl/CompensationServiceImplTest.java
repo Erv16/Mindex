@@ -1,9 +1,6 @@
 package com.mindex.challenge.service.impl;
 
-import com.mindex.challenge.dao.CompensationRepository;
-import com.mindex.challenge.dao.EmployeeRepository;
 import com.mindex.challenge.data.Compensation;
-import com.mindex.challenge.data.Employee;
 import com.mindex.challenge.service.CompensationService;
 import org.junit.After;
 import org.junit.Before;
@@ -11,7 +8,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpEntity;
@@ -21,14 +17,14 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.LocalDate;
-import java.util.Random;
-import java.util.UUID;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.mockito.Mockito.when;
 
-
+/**
+ * Unit Test to create, read and update a compensation record of
+ * an employee
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class CompensationServiceImplTest {

@@ -12,9 +12,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
+/**
+ * Service implementation that includes the business logic for
+ * creation, updating and reading of compensation records for
+ * an existing employee
+ *
+ * @author Erwin Palani
+ */
 @Service
 public class CompensationServiceImpl implements CompensationService {
 
@@ -31,6 +37,16 @@ public class CompensationServiceImpl implements CompensationService {
         this.employeeRepository = employeeRepository;
     }
 
+    /**
+     * Creates a new compensation record for an existing employee
+     *
+     * @param compensation      compensation contains the employee
+     *                          details, salary and effective date
+     *                          which is forwarded onto the service
+     *                          for processing
+     * @return                  compensation record that has been
+     *                          created
+     */
     @Override
     public Compensation createCompensation(Compensation compensation) {
 
@@ -46,6 +62,13 @@ public class CompensationServiceImpl implements CompensationService {
         return compensation;
     }
 
+    /**
+     * Retrieves the compensation record for an employee if the employee exists
+     *
+     * @param employeeId        employee id whose compensation
+     *                          needs to be retrieved
+     * @return                  compensation record of the employee
+     */
     @Override
     public Compensation readCompensation(String employeeId) {
 
@@ -59,6 +82,13 @@ public class CompensationServiceImpl implements CompensationService {
         return compensationRepository.findCompensationByEmployeeId(employeeId);
     }
 
+    /**
+     * Updates the compensation record of an existing employee
+     *
+     * @param compensation      compensation values that will be
+     *                          updated
+     * @return                  updated compensation record
+     */
     @Override
     public Compensation updateCompensation(Compensation compensation) {
         LOG.debug("Updating compensation of employee with id [{}]", compensation.getEmployeeId());

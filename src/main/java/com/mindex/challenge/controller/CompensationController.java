@@ -11,7 +11,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+/**
+ * Class for Task 2 of the assessment related to Compensation
+ * The controller helps in mapping and redirecting create, read
+ * and update requests
+ *
+ * @author Erwin Palani
+ */
 
 @RestController
 @Api(description = "REST API calls pertaining to employee compensations")
@@ -28,6 +34,16 @@ public class CompensationController {
         this.compensationService = compensationService;
     }
 
+    /**
+     * Creates a new compensation record for an existing employee
+     *
+     * @param compensation      compensation contains the employee
+     *                          details, salary and effective date
+     *                          which is forwarded onto the service
+     *                          for processing
+     * @return                  compensation record that has been
+     *                          created
+     */
     @PostMapping("/compensation")
     @ApiOperation(value = "Creates a compensation record for an existing employee", notes = "Returns the newly created compensation record of an employee")
     @ApiResponses(value = {
@@ -40,6 +56,15 @@ public class CompensationController {
         return compensationService.createCompensation(compensation);
     }
 
+    /**
+     * Updates the compensation record of an existing employee
+     *
+     * @param employeeId        employee id whose compensation
+     *                          has to be updated
+     * @param compensation      compensation values that will be
+     *                          updated
+     * @return                  updated compensation record
+     */
     @PutMapping("/compensation/{employeeId}")
     @ApiOperation(value = "Updates a compensation record for an existing employee", notes = "Returns the updated compensation record of an employee")
     @ApiResponses(value = {
@@ -53,6 +78,13 @@ public class CompensationController {
         return compensationService.updateCompensation(compensation);
     }
 
+    /**
+     * Retrieves the compensation record for an employee if the employee exists
+     *
+     * @param employeeId        employee id whose compensation
+     *                          needs to be retrieved
+     * @return                  compensation record of the employee
+     */
     @GetMapping("/compensation/{employeeId}")
     @ApiOperation(value = "Retrieves the compensation record of an existing employee", notes = "Returns the compensation record of an employee")
     @ApiResponses(value = {
