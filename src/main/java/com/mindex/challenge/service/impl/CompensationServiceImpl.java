@@ -26,6 +26,7 @@ public class CompensationServiceImpl implements CompensationService {
     @Autowired
     public CompensationServiceImpl(CompensationRepository compensationRepository, EmployeeRepository employeeRepository) {
 
+        LOG.debug("Autowired instances of Compensation and Employee Repositories");
         this.compensationRepository = compensationRepository;
         this.employeeRepository = employeeRepository;
     }
