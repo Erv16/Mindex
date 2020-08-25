@@ -38,9 +38,16 @@ public class ReportingStructureServiceImpl implements ReportingStructureService 
 
         int numberOfReportees = 0;
         List<Employee> employeeDirectReports = employee.getDirectReports();
-        if(employeeDirectReports != null || employeeDirectReports.size() != 0) {
-            for(Employee reportee: employeeDirectReports) {
-                numberOfReportees += reportee.getDirectReports().size();
+        if(employeeDirectReports != null && employeeDirectReports.size() != 0) {
+            for (Employee reportee : employeeDirectReports) {
+                Employee tempEmployee = employeeRepository.findByEmployeeId(reportee.getEmployeeId());
+                reportee.setEmployeeId(tempEmployee.getEmployeeId());
+                reportee.setFirstName(tempEmployee.getFirstName());
+                reportee.setLastName(tempEmployee.getLastName());
+                reportee.setDepartment(tempEmployee.getDepartment());
+                reportee.setPosition(tempEmployee.getPosition());
+                reportee.setDirectReports(tempEmployee.getDirectReports());
+                numberOfReportees += numberOfReports(tempEmployee);
                 numberOfReportees++;
             }
         }
