@@ -25,7 +25,6 @@ public class CompensationController {
     public CompensationController(CompensationService compensationService) {
 
         LOG.debug("Autowired instance of Compensation Service");
-
         this.compensationService = compensationService;
     }
 
@@ -64,8 +63,6 @@ public class CompensationController {
 
         LOG.debug("Received compensation read request for [{}]", employeeId);
         Compensation compensations = compensationService.readCompensation(employeeId);
-        System.out.println(compensations.toString());
-
         return compensationService.readCompensation(employeeId);
     }
 

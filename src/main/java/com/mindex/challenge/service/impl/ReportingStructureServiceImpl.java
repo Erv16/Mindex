@@ -6,10 +6,12 @@ import com.mindex.challenge.data.ReportingStructure;
 import com.mindex.challenge.exception.EmployeeNotFoundException;
 import com.mindex.challenge.service.ReportingStructureService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class ReportingStructureServiceImpl implements ReportingStructureService {
 
     private EmployeeRepository employeeRepository;
