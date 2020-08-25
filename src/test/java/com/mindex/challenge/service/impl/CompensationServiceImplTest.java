@@ -60,18 +60,23 @@ public class CompensationServiceImplTest {
         testCompensation.setSalary(60000.0);
     }
 
+    @After
+    public void cleanup() {}
+
     @Test
     public void testCreateReadUpdateCompensation() {
-        Compensation createdCompensation = restTemplate.postForEntity(compensationCreateUrl, testCompensation, Compensation.class).getBody();
 
+        // create checks
+        Compensation createdCompensation = restTemplate.postForEntity(compensationCreateUrl, testCompensation, Compensation.class).getBody();
         assertNotNull(createdCompensation.getEmployeeId());
         assertCompensationEquivalence(testCompensation, createdCompensation);
 
+        // read checks
         Compensation readCompensation = restTemplate.getForEntity(compensationGetUrl, Compensation.class, createdCompensation.getEmployeeId()).getBody();
         assertEquals(createdCompensation.getEmployeeId(), readCompensation.getEmployeeId());
         assertCompensationEquivalence(createdCompensation, readCompensation);
 
-        // Update checks
+        // update checks
         readCompensation.setSalary(70000.0);
 
         HttpHeaders headers = new HttpHeaders();
