@@ -14,6 +14,7 @@ public class Compensation {
 
     @Id
     private String employeeId;
+    private Employee employee;
     private double salary;
     private LocalDate effectiveDate;
 
@@ -41,10 +42,19 @@ public class Compensation {
         this.effectiveDate = effectiveDate;
     }
 
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
     @Override
     public String toString() {
         return "Compensation{" +
                 "employeeId='" + employeeId + '\'' +
+                ", employee=" + employee +
                 ", salary=" + salary +
                 ", effectiveDate=" + effectiveDate +
                 '}';

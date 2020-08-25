@@ -94,7 +94,6 @@ public class CompensationController {
     public Compensation readCompensation(@PathVariable String employeeId) {
 
         LOG.debug("Received compensation read request for [{}]", employeeId);
-        Compensation compensations = compensationService.readCompensation(employeeId);
         return compensationService.readCompensation(employeeId);
     }
 
