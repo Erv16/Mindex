@@ -10,14 +10,17 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class ReportingStructureServiceImpl implements ReportingStructureService {
 
     private static final Logger LOG = LoggerFactory.getLogger(ReportingStructureServiceImpl.class);
 
+    private Set<String> distinctDirectReports;
     private EmployeeRepository employeeRepository;
 
     @Autowired
@@ -31,20 +34,21 @@ public class ReportingStructureServiceImpl implements ReportingStructureService 
     public ReportingStructure generateNumberOfReports(String employeeId) {
 
         LOG.debug("Generating number of reports for employee [{}]", employeeId);
+        distinctDirectReports = new HashSet<>();
         ReportingStructure reportingStructure = new ReportingStructure();
         Optional<Employee> employee = Optional.ofNullable(employeeRepository.findByEmployeeId(employeeId));
         if(!employee.isPresent()) {
             throw new EmployeeNotFoundException("Employee with employee id " + employeeId + " does not exist");
         }
         reportingStructure.setEmployee(employee.get());
-        reportingStructure.setNumberOfReports(numberOfReports(employee.get()));
+        numberOfReports(employee.get());
+        reportingStructure.setNumberOfReports(distinctDirectReports.size());
         return reportingStructure;
     }
 
-    public int numberOfReports(Employee employee) {
+    public void numberOfReports(Employee employee) {
 
         LOG.debug("Calculating number of reports for employee [{}]", employee.getEmployeeId());
-        int numberOfReportees = 0;
         List<Employee> employeeDirectReports = employee.getDirectReports();
         if(employeeDirectReports != null && employeeDirectReports.size() != 0) {
             for (Employee reportee : employeeDirectReports) {
@@ -55,11 +59,9 @@ public class ReportingStructureServiceImpl implements ReportingStructureService 
                 reportee.setDepartment(tempEmployee.getDepartment());
                 reportee.setPosition(tempEmployee.getPosition());
                 reportee.setDirectReports(tempEmployee.getDirectReports());
-                numberOfReportees += numberOfReports(tempEmployee);
-                numberOfReportees++;
+                distinctDirectReports.add(tempEmployee.getEmployeeId());
+                numberOfReports(tempEmployee);
             }
         }
-
-        return numberOfReportees;
     }
 }

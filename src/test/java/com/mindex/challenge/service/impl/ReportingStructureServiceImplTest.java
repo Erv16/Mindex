@@ -58,14 +58,12 @@ public class ReportingStructureServiceImplTest {
         seniorEmployee.setPosition("Team Lead");
 
         juniorEmployee1 = new Employee();
-        juniorEmployee1.setEmployeeId(UUID.randomUUID().toString());
         juniorEmployee1.setFirstName("Dick");
         juniorEmployee1.setLastName("Grayson");
         juniorEmployee1.setDepartment("Technology");
         juniorEmployee1.setPosition("Developer III");
 
         juniorEmployee2 = new Employee();
-        juniorEmployee2.setEmployeeId(UUID.randomUUID().toString());
         juniorEmployee2.setFirstName("Jason");
         juniorEmployee2.setLastName("Todd");
         juniorEmployee2.setDepartment("Technology");
@@ -93,7 +91,7 @@ public class ReportingStructureServiceImplTest {
 
         ReportingStructure reportingStructure = restTemplate.getForEntity(reportingStructureUrl, ReportingStructure.class, createdEmployee.getEmployeeId()).getBody();
         assertEquals(reportingStructure.getEmployee().getEmployeeId(), createdEmployee.getEmployeeId());
-        assertEquals(reportingStructure.getNumberOfReports(), 2);
+        assertEquals(1, reportingStructure.getNumberOfReports());
     }
 
 }
