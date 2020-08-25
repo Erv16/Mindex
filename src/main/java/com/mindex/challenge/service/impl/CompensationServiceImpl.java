@@ -20,16 +20,12 @@ public class CompensationServiceImpl implements CompensationService {
 
     private static final Logger LOG = LoggerFactory.getLogger(CompensationServiceImpl.class);
 
-    @Autowired
     private CompensationRepository compensationRepository;
-
-    @Autowired
     private EmployeeRepository employeeRepository;
 
     @Autowired
-    public CompensationServiceImpl() {
+    public CompensationServiceImpl(CompensationRepository compensationRepository, EmployeeRepository employeeRepository) {
 
-        LOG.debug("Autowired instances of Compensation and Employee Repository");
         this.compensationRepository = compensationRepository;
         this.employeeRepository = employeeRepository;
     }
