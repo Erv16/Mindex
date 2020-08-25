@@ -15,6 +15,12 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+/**
+ * Service implementation that includes the business logic for
+ * generating the number of direct reports of an existing employee
+ *
+ * @author Erwin Palani
+ */
 @Service
 public class ReportingStructureServiceImpl implements ReportingStructureService {
 
@@ -30,6 +36,15 @@ public class ReportingStructureServiceImpl implements ReportingStructureService 
         this.employeeRepository = employeeRepository;
     }
 
+    /**
+     * Processes the computed number of direct reports for an employee
+     * and formulates the reporting sturcture
+     *
+     * @param employeeId        employee of whom direct reports have to
+     *                          be calculated
+     * @return                  reporting structure containing number
+     *                          of direct reports
+     */
     @Override
     public ReportingStructure generateNumberOfReports(String employeeId) {
 
@@ -46,6 +61,11 @@ public class ReportingStructureServiceImpl implements ReportingStructureService 
         return reportingStructure;
     }
 
+    /**
+     * Utility method to compute the number of direct reports of every sub employee
+     *
+     * @param employee      target employee whose direct reports need to be calculated
+     */
     public void numberOfReports(Employee employee) {
 
         LOG.debug("Calculating number of reports for employee [{}]", employee.getEmployeeId());
