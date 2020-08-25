@@ -57,6 +57,7 @@ public class CompensationServiceImpl implements CompensationService {
             throw new EmployeeNotFoundException("Employee with employee id " + compensation.getEmployeeId() + " does not exist");
         }
 
+        compensation.setEmployee(employee.get());
         compensationRepository.insert(compensation);
 
         return compensation;
@@ -97,6 +98,7 @@ public class CompensationServiceImpl implements CompensationService {
         if(!employee.isPresent()) {
             throw new EmployeeNotFoundException("Employee with employee id " + compensation.getEmployeeId() + " does not exist");
         }
+        compensation.setEmployee(employee.get());
         Optional<Compensation> compensationExists = Optional.ofNullable(compensationRepository.findCompensationByEmployeeId(compensation.getEmployeeId()));
         if(!compensationExists.isPresent()) {
             throw new CompensationNotFoundException("Compensation for employee id " + compensation.getEmployeeId() + " does not exist");
