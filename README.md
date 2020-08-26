@@ -87,6 +87,11 @@ Please upload your results to a publicly accessible Git repo. Free ones are prov
 
 ## Implementation Pointers
 
+* Comments are mentioned in java docs format
+* REST API is documented using Swagger for Compensation and Reporting Structure
+* Unit tests are written for Task 1 and 2
+* Extensively tested end points using Postman
+
 ### Task 1
 
    * REST endpoint: /reporting/id GET request where id is the employee id whose direct reports need to be computed
@@ -97,16 +102,10 @@ Please upload your results to a publicly accessible Git repo. Free ones are prov
 
 ### Task 2
 
-   ** REST endpoints: 
+   * REST endpoints: 
    * /compensation POST request to create a compensation record
    * /compensation/id GET request where id is the employee id    whose compensation request needs to be retrieved
    * /compensation/id PUT request where id is the employee id whose compensation record needs to be updated
    * Custom Exceptions are generated if employee or corresponding compensation record does not exist
    * Values are persisted in the database
-
-
-* Comments are mentioned in java docs format
-* REST API is documented using Swagger for Compensation and Reporting Structure
-* Unit tests are written for Task 1 and 2
-* Extensively tested end points using Postman
 
