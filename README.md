@@ -97,7 +97,7 @@ Please upload your results to a publicly accessible Git repo. Free ones are prov
 
 ### Task 2
 
-   * REST endpoints: 
+   ** REST endpoints: 
    * /compensation POST request to create a compensation record
    * /compensation/id GET request where id is the employee id    whose compensation request needs to be retrieved
    * /compensation/id PUT request where id is the employee id whose compensation record needs to be updated
